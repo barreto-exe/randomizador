@@ -20,6 +20,8 @@ public class frmAgregarPersonas extends javax.swing.JFrame {
      */
     public frmAgregarPersonas() {
         initComponents();
+        
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -57,7 +59,7 @@ public class frmAgregarPersonas extends javax.swing.JFrame {
         jLabel4.setText("Lista actual:");
 
         lblNumeroParticipante.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        lblNumeroParticipante.setText("Ingrese apodo del participante #n:");
+        lblNumeroParticipante.setText("Ingrese apodo del participante #1:");
 
         txtApodo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtApodo.addActionListener(new java.awt.event.ActionListener() {
@@ -88,6 +90,11 @@ public class frmAgregarPersonas extends javax.swing.JFrame {
         });
 
         btnJugar.setText("Jugar");
+        btnJugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJugarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -151,14 +158,14 @@ public class frmAgregarPersonas extends javax.swing.JFrame {
 
     }//GEN-LAST:event_txtApodoKeyTyped
 
-    private int personaAgg = 1;
+    private int personaAgg = 0;
     
     private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
         this.listaApodos.add(this.txtApodo.getText(),personaAgg);
         this.txtApodo.setText("");
         personaAgg++;
         
-        this.lblNumeroParticipante.setText("Ingrese apodo del participante #"+personaAgg);
+        this.lblNumeroParticipante.setText("Ingrese apodo del participante #"+(personaAgg+1));
     }//GEN-LAST:event_btnIngresarActionPerformed
 
     private void txtApodoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApodoKeyReleased
@@ -175,9 +182,23 @@ public class frmAgregarPersonas extends javax.swing.JFrame {
             this.listaApodos.remove(borrado);
             personaAgg--;
             
-            this.lblNumeroParticipante.setText("Ingrese apodo del participante #"+personaAgg);
+            this.lblNumeroParticipante.setText("Ingrese apodo del participante #"+(personaAgg+1));
         }
     }//GEN-LAST:event_listaApodosKeyReleased
+
+    private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
+        if(personaAgg < 2)        
+        {
+            JOptionPane.showMessageDialog(null, "Ingresa al menos dos participantes!");
+        }
+        else
+        {
+            frmPrincipal ventana = new frmPrincipal(this.listaApodos.getItems());
+            ventana.setVisible(true);
+            this.dispose();
+        }
+        
+    }//GEN-LAST:event_btnJugarActionPerformed
 
     /**
      * @param args the command line arguments

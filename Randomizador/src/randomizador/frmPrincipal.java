@@ -14,8 +14,19 @@ public class frmPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form frmPrincipal
      */
-    public frmPrincipal() {
+    String[] participantes;
+    
+    public frmPrincipal() 
+    {
         initComponents();
+    }
+    
+    public frmPrincipal(String[] participantes) 
+    {
+        initComponents();
+        
+        this.participantes = participantes;
+        this.setLocationRelativeTo(null);
     }
 
     /**
