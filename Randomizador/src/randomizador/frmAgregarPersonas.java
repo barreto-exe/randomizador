@@ -5,6 +5,10 @@
  */
 package randomizador;
 
+import java.awt.event.KeyEvent;
+import javafx.scene.input.KeyCode;
+import javax.swing.*;
+
 /**
  *
  * @author Luis
@@ -61,8 +65,27 @@ public class frmAgregarPersonas extends javax.swing.JFrame {
                 txtApodoActionPerformed(evt);
             }
         });
+        txtApodo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtApodoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApodoKeyTyped(evt);
+            }
+        });
 
         btnIngresar.setText("Ingresar");
+        btnIngresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnIngresarActionPerformed(evt);
+            }
+        });
+
+        listaApodos.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                listaApodosKeyReleased(evt);
+            }
+        });
 
         btnJugar.setText("Jugar");
 
@@ -94,15 +117,15 @@ public class frmAgregarPersonas extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(lblNumeroParticipante)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtApodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtApodo, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnIngresar)
-                .addGap(33, 33, 33)
+                .addComponent(btnIngresar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(listaApodos, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnJugar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -123,6 +146,38 @@ public class frmAgregarPersonas extends javax.swing.JFrame {
     private void txtApodoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtApodoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtApodoActionPerformed
+
+    private void txtApodoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApodoKeyTyped
+
+    }//GEN-LAST:event_txtApodoKeyTyped
+
+    private int personaAgg = 1;
+    
+    private void btnIngresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIngresarActionPerformed
+        this.listaApodos.add(this.txtApodo.getText(),personaAgg);
+        this.txtApodo.setText("");
+        personaAgg++;
+        
+        this.lblNumeroParticipante.setText("Ingrese apodo del participante #"+personaAgg);
+    }//GEN-LAST:event_btnIngresarActionPerformed
+
+    private void txtApodoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApodoKeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER)
+        {
+            this.btnIngresar.doClick();
+        }
+    }//GEN-LAST:event_txtApodoKeyReleased
+
+    private void listaApodosKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_listaApodosKeyReleased
+        if(evt.getKeyCode() == KeyEvent.VK_BACK_SPACE)
+        {
+            int borrado = this.listaApodos.getSelectedIndex();
+            this.listaApodos.remove(borrado);
+            personaAgg--;
+            
+            this.lblNumeroParticipante.setText("Ingrese apodo del participante #"+personaAgg);
+        }
+    }//GEN-LAST:event_listaApodosKeyReleased
 
     /**
      * @param args the command line arguments
